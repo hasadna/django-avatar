@@ -64,7 +64,7 @@ def webcam_upload(request, id):
         avatar = Avatar(user=user, primary=True)
         avatar.avatar.save("%s_webcam_%s.jpg" %
                           (user.pk, Avatar.objects.filter(user=user).count()),
-                           ContentFile(request.raw_post_data))
+                           ContentFile(request.body))
         avatar.save()
         messages.success(request, _("Successfully uploaded a new avatar."))
         return HttpResponse(status=200, content="ok")
